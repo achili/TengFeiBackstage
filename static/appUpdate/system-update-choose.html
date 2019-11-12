@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>奕桥park</title>
+  <meta name="viewport" content="user-scalable=no">
+
+  <style type="text/css">
+    .mark{
+      display: none;
+      width: 100vw;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: rgba(0,0,0,.5);
+      -moz-opacity: 0.3;
+      filter: alpha(opacity=30);
+    }
+    .prompt_message {
+      width: 500px;
+      height: 500px;
+      position: fixed;
+      right: 10%;
+      background: url("../img/live_weixin.png") center no-repeat;
+      background-size: 100%;
+    }
+  </style>
+
+</head>
+<body>
+<div>
+  <div class="mark" id="test">
+    <div class="prompt_message"></div>
+  </div>
+</div>
+<script type="text/javascript">
+  function f() {
+    var userAgent = navigator.userAgent;
+    var windowUserAgent = window.navigator.userAgent.toLowerCase();
+    var isIOS = !!userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+    var isMac=userAgent.indexOf('iPhone') > -1 || userAgent.indexOf('Mac') > -1;
+    var weChat = windowUserAgent.match(/MicroMessenger/i) == "micromessenger";
+    var isAndroid = userAgent.indexOf('Android') > -1 || userAgent.indexOf('Adr') > -1; //android终端
+    if(isAndroid && weChat){
+      var mark = document.getElementsByClassName("mark")[0];
+      mark.style.display = "block";
+      return;
+    }
+    if(isIOS||isMac){
+      window.location.href = iosUrl;
+    }else {
+      window.location.href = androidUrl;
+    }
+  }
+
+  var xhr = new XMLHttpRequest();
+  var iosUrl;
+  var androidUrl;
+  xhr.open("POST", "/api/appsettings/detail/dfde87bb-5b9b-4497-9c26-2c8165f830df", true);
+  // 添加http头，发送信息至服务器时内容编码类型
+  // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 304)) {
+      iosUrl = JSON.parse(xhr.responseText).data.iosUrl ;
+      androidUrl = JSON.parse(xhr.responseText).data.androidFile.url ;
+    }
+    f();
+  };
+  xhr.send();
+</script>
+</body>
+</html>
+
+

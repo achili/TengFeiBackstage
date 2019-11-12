@@ -1,0 +1,196 @@
+
+html, body {
+  font-family: "微软雅黑", Microsoft YaHei, "Helvetica Neue", Helvetica, Arial, sans-serif, "open sans";
+  font-size: 13px;
+  background-color: white;
+  img {
+    max-width: 100%;
+  }
+}
+
+//手机端的弹出框太大了
+@media (max-width: 768px) {
+  .el-message-box__wrapper {
+    .el-message-box {
+      width: 300px;
+    }
+  }
+}
+
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.main-app {
+  //cell标题样式
+  .cell-title {
+    font-size: 16px;
+    color: #666;
+    font-family: "微软雅黑", Microsoft YaHei, "Helvetica Neue", Helvetica, Arial, sans-serif, "open sans";
+  }
+  .cell-description {
+    font-size: 12px;
+    color: #888888;
+    margin: 5px 0;
+  }
+  .cell-description-2 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    position: relative;
+    line-height: 40px;
+    color: #666666;
+    -webkit-line-clamp: 1;
+    text-overflow: ellipsis;
+  }
+  .cell-description-3 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    position: relative;
+    line-height: 17px;
+    max-height: 51px;
+    -webkit-line-clamp: 3;
+    text-overflow: ellipsis;
+  }
+
+  .cell-content {
+    font-size: 12px;
+    color: #676a6c;
+  }
+  .cell-max-title{
+    font-size: 26px;
+    color: #666666;
+  }
+  .cell-subtitle{
+    font-size: 18px;
+    color: #888888;
+  }
+  .cell-subhead{
+    font-size: 14px;
+    color: #666666;
+  }
+  .cell-content {
+     font-size: 12px;
+     color: #676a6c;
+   }
+  .cell-title-color{
+    color: #555555;
+  }
+  .cell-select-color{
+    color: #999999;
+  }
+  .cell-time{
+    color: #9c9c9c;
+  }
+  .cell-deleted{
+    color: #bababa;
+  }
+  .cell-gray{
+    color: #dfdfdf;
+  }
+
+  .cell-normal{
+    color: #84e599;
+  }
+  .cell-danger{
+    color: #ff9a9a;
+  }
+  .cell-waring{
+    color: #ffcc2c;
+  }
+  .cell-blue{
+    color: #00b5e2;
+  }
+  .animated {
+    animation-fill-mode: none;
+  }
+
+  .box-orient {
+    /* autoprefixer: off*/
+    -webkit-box-orient: vertical;
+    /* autoprefixer: on*/
+    font-size: 22px;
+  }
+  .segmenting-line{
+    border: 1px #e2e2e2 solid;
+  }
+
+  .font-cell-more-min {
+    min-height: 14px;
+    font-size: 14px;
+    white-space:nowrap;
+    color: #888888;
+  }
+
+  .white-nowrap{
+    white-space:nowrap;
+  }
+
+  .font-cell-min {
+    min-height: 16px;
+    font-size: 16px;
+    white-space:nowrap;
+  }
+
+  .font-cell-mid {
+    min-height: 18px;
+    font-size: 18px;
+    white-space:nowrap;
+  }
+
+  .font-min-height {
+    line-height: 24px;
+    max-height: 48px;
+    overflow: hidden;
+    font-size: 14px;
+    color: #666666;
+    margin-top: 38px;
+  }
+
+  .font-max-height {
+    line-height: 24px;
+    max-height: 48px;
+    overflow: hidden;
+    font-size: 16px;
+    color: #666666;
+    margin-top: 30px;
+  }
+
+  .font-middle-height {
+    line-height: 30px;
+    max-height: 50px;
+    overflow: hidden;
+    font-size: 16px;
+    color: #666666;
+    margin-top:35px;
+  }
+
+  .font-height{
+    line-height: 20px;
+    max-height: 40px;
+    overflow: hidden;
+    font-size: 16px;
+    color: #666666;
+    margin-top:10px;
+  }
+
+  .border-0{
+    border: 0;
+  }
+
+}
+
+@import "bootstrap/bootstrap.less";
+@import "inspinia/style.less";
+@import "global/border";
+@import "global/button";
+@import "global/color";
+@import "global/font";
+@import "global/layout";
+@import "global/miscellaneous";
+@import "global/responsive";
+@import "global/variables";
+
+

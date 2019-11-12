@@ -1,0 +1,43 @@
+stages:
+  - build
+  - deploy
+
+cache:
+  paths:
+    - dist/
+    - node_modules/
+
+job_build:
+  stage: build
+  script:
+    - sed -i "s/debug:\ true/debug:\ false/g" ./src/_store/index.js
+    - cnpm install
+    - npm run build
+  only:
+    - beta
+    - master
+  tags:
+    - fwp
+
+job_deploy_beta:
+  stage: deploy
+  script:
+    - rm -rf /home/app/beta/passenger
+    - mkdir /home/app/beta/passenger
+    - cp -r ./dist/. /home/app/beta/passenger
+  only:
+      - beta
+  tags:
+    - fwp
+
+job_deploy_master:
+  stage: deploy
+  script:
+    - rm -rf /home/app/master/passenger
+    - mkdir /home/app/master/passenger
+    - cp -r ./dist/. /home/app/master/passenger
+  only:
+      - master
+  tags:
+    - fwp
+

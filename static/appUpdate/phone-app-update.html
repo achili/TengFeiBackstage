@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>奕桥park</title>
+  <meta name="viewport" content="user-scalable=no">
+
+  <style type="text/css">
+    body {
+      margin: 0
+    }
+    .backPicture{
+      width: 100vw;
+      height: 100vh;
+      background: url("../img/phoneBackground.png") center no-repeat;
+      background-size: cover;
+    }
+    .article{
+      width: 660px;
+      height: 255px;
+      position: fixed;
+      top: 56%;
+      left: 20%;
+      font-size: 27px ;
+      text-align: center;
+      color: #666666;
+    }
+    .article_text{
+      line-height: 60px;
+      position: absolute;
+      left: 10px;
+    }
+    .download_button {
+      position: fixed;
+      bottom: 17%;
+      left: 12%;
+    }
+    .download{
+      width: 771px;
+      height: 108px;
+      background-image: url("../img/button.png");
+      background-size: 100% 100%;
+    }
+    .download_text{
+      width: 100%;
+      text-align: center;
+      height: 100%;
+      line-height: 102px;
+      font-size: 43px;
+      font-family: "微软雅黑",serif;
+      font-weight:lighter;
+      color:#FFFFFF;
+    }
+    .version{
+      position: fixed;
+      bottom: 11%;
+      width: 100vw;
+    }
+    .version_text{
+      width: 100%;
+      text-align: center;
+      height: 100%;
+      overflow: hidden;
+      line-height: 94px;
+      font-size: 25px;
+      font-family: "微软雅黑",serif;
+      font-weight: lighter;
+      color:#9C9C9C;
+    }
+    .mark{
+      display: none;
+      width: 100vw;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: rgba(0,0,0,.5);
+      -moz-opacity: 0.3;
+      filter: alpha(opacity=30);
+    }
+    .prompt_message {
+      width: 500px;
+      height: 500px;
+      position: fixed;
+      right: 10%;
+      background: url("../img/live_weixin.png") center no-repeat;
+      background-size: 100%;
+    }
+
+  </style>
+  <script>
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "/api/appsettings/detail/dfde87bb-5b9b-4497-9c26-2c8165f830df", true);
+    //添加http头，发送信息至服务器时内容编码类型
+    // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 304)) {
+        document.getElementsByClassName("version_text")[0].innerText =
+          "版本号：" + JSON.parse(xhr.responseText).data.versionNumber +
+          " ( " + (JSON.parse(xhr.responseText).data.androidFile.size/1048576).toFixed(2) + "MB )";
+      }
+    };
+    xhr.send();
+  </script>
+</head>
+<body>
+<div class="backPicture">
+  <div class="article">
+    <div class="article_text">
+      <span class="line_one">奕桥|Bridge+是凯德集团旗下的联合办公<br/></span>
+      <span class="line_two">空间和创新社群平台。<br/></span>
+      <span class="line_three">在这里，好奇者，探险家和创造者一起急速前行。<br/></span>
+      <span class="line_four">立刻下载APP，探索新世代的工作方式。</span>
+    </div>
+  </div>
+
+  <div class="download_button">
+    <div class="download"  onclick="showWechat()">
+      <div class="download_text ">立即下载A P P</div>
+    </div>
+  </div>
+
+  <div class="version">
+    <div class="version_text"></div>
+  </div>
+  <div class="mark" onclick="hideWechat()">
+    <div class="prompt_message"></div>
+  </div>
+</div>
+</body>
+
+<script>
+  function showWechat() {
+    var userAgent = navigator.userAgent;
+    var windowUserAgent = window.navigator.userAgent.toLowerCase();
+    var isAndroid = userAgent.indexOf('Android') > -1 || userAgent.indexOf('Adr') > -1; //android终端
+    var weChat = windowUserAgent.match(/MicroMessenger/i) == "micromessenger";
+    var isiOS = !!userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+    if(isAndroid && weChat){
+      var mark = document.getElementsByClassName("mark")[0];
+      mark.style.display = "block";
+    }else {
+      window.location.href="/static/appUpdate/system-update-choose.html"
+    }
+
+  }
+  function hideWechat() {
+    var mark = document.getElementsByClassName("mark")[0];
+    mark.style.display = "none";
+  }
+</script>
+
+</html>

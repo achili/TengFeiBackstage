@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>奕桥park</title>
+
+  <style type="text/css">
+    .backPicture{
+      width: 99vw;
+      height: 98vh;
+      background: url("../img/background.png") no-repeat center;
+    }
+    .logo{
+      width: 294px;
+      height: 173px;
+      position: fixed;
+      left: 114px;
+      top: 11px;
+      background-image: url("../img/logo.png");
+      background-size: 100% 100%;
+    }
+    .download_form{
+      width: 700px;
+      height: 600px;
+      position: absolute;
+      top:210px;
+      right:10.5%;
+    }
+    .text_article{
+      width: 660px;
+      height: 200px;
+      font-family: "微软雅黑",serif;
+      font-weight: lighter;
+      font-size: 19pt;
+      color:#333333;
+    }
+    .text_line_one{
+      position: absolute;
+      top:7%;
+    }
+    .text_line_two{
+      position: absolute;
+      top:14.5%;
+    }
+    .app_prompt{
+      position: absolute;
+      top:21.5%;
+      color:#00B2E6;
+    }
+    .ios_download{
+      width: 260px;
+      height: 85px;
+      position: absolute;
+      top: 255px;
+      background-image: url("../img/iosbutton.png");
+      background-size: 100% 100%;
+      cursor: pointer
+    }
+    .ios_text{
+      font-size: 20pt;
+      font-weight: normal;
+      position: absolute;
+      top: 24px;
+      left: 101px;
+      font-family: "微软雅黑",serif;
+      color:#FFFFFF;
+    }
+    .android_download{
+      width: 260px;
+      height: 85px;
+      position: absolute;
+      top: 384px;
+      background-image: url("../img/androidbutton.png");
+      background-size: 100% 100%;
+      cursor: pointer
+    }
+    .android_text{
+      font-size: 20pt;
+      font-weight: normal;
+      position: absolute;
+      top: 24px;
+      left: 101px;
+      font-family: "微软雅黑",serif;
+      color:#FFFFFF;
+    }
+    .code_back{
+      width: 223px;
+      height: 248px;
+      background-size: auto;
+      position: absolute;
+      bottom: 117px;
+      right: 110px;
+      background-color: white;
+      box-shadow:3px 3px 12px #e2e2e2;
+    }
+    .code{
+      width: 170px;
+      height: 170px;
+      background-size: 100%;
+      background-image: url("../img/code.png");
+      position: absolute;
+      left:24px;
+      top: 18px;
+    }
+    .code_text{
+      font-size: 16pt;
+      line-height: 40px;
+      color:#999999;
+      position: absolute;
+      left:36px;
+      bottom:11px;
+    }
+    .version{
+      height: 36px;
+      position: absolute;
+      bottom: 48px;
+      font-family: "微软雅黑",serif;
+      font-weight: normal;
+      font-size: 14.5pt;
+      line-height: 40px;
+      color:#999999;
+    }
+    @media (max-width: 1510px) {
+      .download_form{
+        width: 600px;
+        height: 600px;
+      }
+    }
+    @media (max-height: 700px) {
+      .download_form{
+        position: absolute;
+        top:20px;
+        right:10.5%;
+      }
+    }
+  </style>
+
+  <script>
+    function iosclick() {
+      window.location.href = iosUrl;
+    }
+    function androidclick() {
+      window.location.href = androidUrl;
+    }
+    var xhr = new XMLHttpRequest();
+    var iosUrl;
+    var androidUrl;
+    xhr.open("POST", "/api/appsettings/detail/dfde87bb-5b9b-4497-9c26-2c8165f830df", true);
+    // 添加http头，发送信息至服务器时内容编码类型
+    // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 304)) {
+        document.getElementsByClassName("version_number")[0].innerText =
+          "版本号：" + JSON.parse(xhr.responseText).data.versionNumber +
+          " ( " + (JSON.parse(xhr.responseText).data.androidFile.size/1048576).toFixed(2) + "MB )";
+        iosUrl = JSON.parse(xhr.responseText).data.iosUrl ;
+        androidUrl = JSON.parse(xhr.responseText).data.androidFile.url ;
+      }
+    };
+    xhr.send();
+  </script>
+</head>
+
+<body>
+<div class="backPicture">
+  <div class="logo"></div>
+  <div class="download_form">
+    <div class="text_article">奕桥|Bridge+是凯德集团旗下的联合办公空间和创<br/>
+      <div class="text_line_one">新社群平台。<br/></div>
+      <div class="text_line_two">在这里，   好奇者， 探险家和创造者一起急速前行。<br/></div>
+      <div class="app_prompt">立刻下载APP，探索新世代的工作方式 </div></div>
+    <div class="version version_text"> </div>
+
+    <div class="ios_download" onclick="iosclick()">
+      <span class="ios_text">IOS版下载</span>
+    </div>
+
+    <div class="android_download" onclick="androidclick()">
+      <span class="android_text">安卓版下载</span>
+    </div>
+
+    <div class="version">
+      <span class="version_number"></span>
+    </div>
+
+    <div class="code_back">
+      <div class="code"></div>
+      <div class="code_text">扫描二维码下载</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
+
+
+
+
