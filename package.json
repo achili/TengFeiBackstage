@@ -13,7 +13,7 @@
   "dependencies": {
     "animate.css": "^3.5.2",
     "awe-dnd": "^0.3.1",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "babel-polyfill": "^6.26.0",
     "bootstrap": "^3.3.7",
     "clockpicker": "^0.0.7",
