@@ -17,7 +17,7 @@
     "babel-polyfill": "^6.26.0",
     "bootstrap": "^3.3.7",
     "clockpicker": "^0.0.7",
-    "codemirror": "^5.39.0",
+    "codemirror": "^5.58.2",
     "echarts": "^4.0.2",
     "element-ui": "^2.0.2",
     "enquire.js": "^2.1.6",
